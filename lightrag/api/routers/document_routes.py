@@ -734,6 +734,16 @@ class DocumentManager:
         for ext in self.supported_extensions:
             logger.debug(f"Scanning for {ext} files in {self.input_dir}")
             for file_path in self.input_dir.glob(f"*{ext}"):
+                if file_path in [
+                    "graph_chunk_entity_relation.graphml",
+                    "kv_store_doc_status.json",
+                    "kv_store_full_docs.json",
+                    "kv_store_text_chunks.json",
+                    "vdb_chunks.json",
+                    "vdb_entities.json",
+                    "vdb_relationships.json",
+                ]:
+                    continue
                 if file_path not in self.indexed_files:
                     new_files.append(file_path)
         return new_files
